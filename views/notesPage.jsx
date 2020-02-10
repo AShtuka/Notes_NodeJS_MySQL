@@ -1,7 +1,9 @@
 const React = require('react');
 const MainLayout = require('./layouts/main');
 const Navbar = require('./components/notesPageNav');
-const Note = require('./components/note');
+const Note = require('./components/Note/note');
+const NoteModal = require('./components/noteModal');
+const AddTaskBtn = require('./components/addTaskBtn');
 
 function NotesPage(props) {
     return (
@@ -13,6 +15,12 @@ function NotesPage(props) {
                 <Note />
                 <Note />
                 <Note />
+                <Note />
+                <Note />
+                <Note />
+                <Note />
+                <AddTaskBtn/>
+                <NoteModal />
             </div>
         </MainLayout>
     );
