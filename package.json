@@ -1,0 +1,30 @@
+{
+  "name": "notes_nodejs_mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AShtuka/Notes_NodeJS_MySQL.git"
+  },
+  "author": "Shtuka Oleksandr <ashtuka@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AShtuka/Notes_NodeJS_MySQL/issues"
+  },
+  "homepage": "https://github.com/AShtuka/Notes_NodeJS_MySQL#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-react-views": "^0.11.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

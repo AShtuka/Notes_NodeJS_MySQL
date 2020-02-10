@@ -1,0 +1,12 @@
+node_modules
+*.psd
+*.gif
+*.zip
+*.idea
+*.DS_Storegit
+_brief/
+.DS_Store
+.idea
+.pnp.js
+npm-debug.log*
+keys/keys.dev.js
