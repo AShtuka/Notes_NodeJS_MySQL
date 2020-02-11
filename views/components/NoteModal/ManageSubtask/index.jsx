@@ -2,8 +2,8 @@ const React = require('react');
 
 function NoteMarkedItems(props) {
     return (
-        <div className='footer-nav'>
-            <p className='marked-items'>
+        <div className='flex-container'>
+            <p id='addSubtask' className='marked-items'>
                 <i className="material-icons position">add</i>
                 <span className='text'>Add subtask</span>
             </p>

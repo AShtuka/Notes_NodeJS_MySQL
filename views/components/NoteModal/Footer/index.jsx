@@ -4,12 +4,12 @@ function Footer(props) {
     return (
         <>
             <div className="modal-footer">
-                <div className='footer-nav'>
+                <div className='flex-container'>
                     <a className='dropdown-trigger footer-nav-item' href="#" data-target='category'>
                         <i className="material-icons position">category</i>
                         <span className='text'> Categories</span>
                     </a>
-                    <a className='footer-nav-item' href="#">
+                    <a id='addList' className='footer-nav-item' href="#">
                         <i className="material-icons position">list</i>
                         <span className='text'> Add list</span>
                     </a>
