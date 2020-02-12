@@ -11,8 +11,11 @@ function NoteModal(props) {
                         <Title/>
                         <div>
                             <ul id='subtasksContainer' className='subtasks-container hidden'>
-                                <Subtask />
+                                <div id='inWork'>
+                                    <Subtask />
+                                </div>
                                 <ManageSubtask />
+                                <div id='done'></div>
                             </ul>
                         </div>
                     </div>
