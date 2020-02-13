@@ -5,6 +5,7 @@ const path = require('path');
 
 const homePageRoutes = require('./routes/homePage');
 const notesPageRoutes = require('./routes/notesPage');
+const notePageRoutes = require('./routes/notePage');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/', homePageRoutes);
 app.use('/notesPage', notesPageRoutes);
+app.use('/notePage', notePageRoutes);
 
 const PORT = process.env.PORT || 3000;
 

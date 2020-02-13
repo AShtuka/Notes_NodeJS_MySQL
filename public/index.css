@@ -128,4 +128,12 @@ input[name=subtask] {
     text-decoration: line-through;
 }
 
+nav .brand-logo.right {
+    padding: 8px;
+}
+
+nav .brand-logo i.material-icons {
+    margin: -8px;
+}
+
 

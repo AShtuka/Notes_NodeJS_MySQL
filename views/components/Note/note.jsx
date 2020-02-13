@@ -7,7 +7,7 @@ const NoteMarkedItems = require('./NoteMarkedItems');
 function Note(props) {
     const subtasksList = ['Marvel', 'DC', 'StarWars'];
     return (
-        <a href="#modal" className='modal-trigger'>
+        <a href="/notePage">
             <div className="col s10 m6 l4 xl3 offset-s1">
                 <div className="card">
 
