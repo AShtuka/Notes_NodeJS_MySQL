@@ -72,6 +72,15 @@ th {
     align-items: end;
 }
 
+
+.note-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    height: calc(100vh - 64px);
+}
+
 .modal .modal-footer {
     background-color: transparent;
     padding: 25px 6px 0;
@@ -90,10 +99,12 @@ th {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
-.footer-nav-item {
+.footer-item {
     color: white;
+    align-self: center;
 }
 
 .input-field input[name=title] {
@@ -135,5 +146,6 @@ nav .brand-logo.right {
 nav .brand-logo i.material-icons {
     margin: -8px;
 }
+
 
 
