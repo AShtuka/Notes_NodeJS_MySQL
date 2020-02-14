@@ -43,6 +43,7 @@ th {
 .input-field {
     margin-bottom: 0;
     margin-top: 0;
+    width: 100%;
 }
 
 .position {
@@ -102,11 +103,6 @@ th {
     width: 100%;
 }
 
-.footer-item {
-    color: white;
-    align-self: center;
-}
-
 .input-field input[name=title] {
     color: white;
     border-bottom: 1px solid transparent;
@@ -145,6 +141,15 @@ nav .brand-logo.right {
 
 nav .brand-logo i.material-icons {
     margin: -8px;
+}
+.footer-note-page {
+    height: 50px;
+    padding: 0 15px;
+}
+
+.footer-note-page a {
+    color: white;
+    cursor: pointer;
 }
 
 
