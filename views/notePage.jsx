@@ -3,15 +3,24 @@ const MainLayout = require('./layouts/main');
 const Navbar = require('./components/notePageNav');
 const Footer = require('./components/NotePage/footer');
 const Title = require('./components/NotePage/title');
-const Subtask = require('./components/NoteModal/Subtask');
-const ManageSubtask = require('./components/NoteModal/ManageSubtask');
+const Subtask = require('./components/NotePage/subtask');
+const ManageSubtask = require('./components/NotePage/manageSubtask');
 
 function NotePage(props) {
     return (
         <MainLayout {...props}>
             <Navbar />
-            <div className='note-page-container grey-text text-lighten-5'>
-                <Title />
+            <div id='notePage' className='note-page-container grey-text text-lighten-5'>
+                <div className='row note-page'>
+                    <Title />
+                    <ul id='subtasksContainer' className='subtasks-container hidden col s12 m10 offset-m1 l6 xl6'>
+                        <div id='inWork'>
+                            <Subtask />
+                        </div>
+                        <ManageSubtask />
+                        <div id='done' className='hidden'></div>
+                    </ul>
+                </div>
                 <Footer />
             </div>
         </MainLayout>

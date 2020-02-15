@@ -2,7 +2,6 @@ const React = require('react');
 const MainLayout = require('./layouts/main');
 const Navbar = require('./components/notesPageNav');
 const Note = require('./components/Note/note');
-const NoteModal = require('./components/NoteModal/noteModal');
 const AddTaskBtn = require('./components/addTaskBtn');
 
 function NotesPage(props) {
@@ -20,7 +19,7 @@ function NotesPage(props) {
                 <Note />
                 <Note />
                 <AddTaskBtn/>
-                <NoteModal />
+                {/*<NoteModal />*/}
             </div>
         </MainLayout>
     );

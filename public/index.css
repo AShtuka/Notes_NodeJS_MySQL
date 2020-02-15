@@ -61,39 +61,12 @@ th {
     border-radius: 25px;
 }
 
-.modal {
-    top: 15% !important;
-    height: 80%;
-    max-height: 80%;
-    background: url(./img/joker.jpg) no-repeat center center fixed;
-    background-size: cover;
-    display: flex !important;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: end;
-}
-
-
 .note-page-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: end;
     height: calc(100vh - 64px);
-}
-
-.modal .modal-footer {
-    background-color: transparent;
-    padding: 25px 6px 0;
-}
-
-.modal .modal-footer nav {
-    background-color: transparent;
-}
-
-.modal .modal-content {
-    width: 100%;
-    padding-bottom: 0;
 }
 
 .flex-container {
@@ -106,7 +79,12 @@ th {
 .input-field input[name=title] {
     color: white;
     border-bottom: 1px solid transparent;
-    font-size: 2.28rem;
+    font-size: 3.28rem;
+}
+
+.input-field img {
+    width: 100%;
+    max-width: 640px;
 }
 
 input[name=subtask] {
@@ -150,6 +128,10 @@ nav .brand-logo i.material-icons {
 .footer-note-page a {
     color: white;
     cursor: pointer;
+}
+
+.row.note-page {
+    width: 100%;
 }
 
 
