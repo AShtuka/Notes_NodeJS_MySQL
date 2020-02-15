@@ -1,15 +1,27 @@
+let emptySubtask;
+
+const createEmptySubtask = () => {
+    const subtasksList = document.getElementsByName('subtasksItem');
+    const newSubtask = subtasksList[0].cloneNode(true);
+    newSubtask.querySelector('.checkbox').checked = false;
+    newSubtask.querySelector('.subtask').value = '';
+    newSubtask.querySelector('.subtask').classList.remove('line-through');
+    emptySubtask = newSubtask.cloneNode(true);
+    document.getElementById('inWork').appendChild(newSubtask);
+};
+
 const addList = () => {
     const subtaskContainer = document.getElementById('subtasksContainer');
     subtaskContainer.classList.remove('hidden');
 };
 
 const addSubtask = () => {
-    const subtasksList = document.getElementsByName('subtasksItem');
-    const newSubtask = subtasksList[0].cloneNode(true);
-    newSubtask.querySelector('.checkbox').checked = false;
-    newSubtask.querySelector('.subtask').value = '';
-    newSubtask.querySelector('.subtask').classList.remove('line-through');
-    document.getElementById('inWork').appendChild(newSubtask);
+    if (emptySubtask) {
+        const newSubtask = emptySubtask.cloneNode(true);
+        document.getElementById('inWork').appendChild(newSubtask);
+    } else {
+        createEmptySubtask();
+    }
 };
 
 const moveSubtask = subtask => {
@@ -46,6 +58,23 @@ const deleteSubtask = subtask => {
     subtask.remove();
 };
 
+const getData = () => {
+    const title = document.getElementById('title').value;
+    let inWorkList = document.getElementById('inWork');
+    inWorkList = inWorkList.querySelectorAll('input[type=text]');
+    let doneList = document.getElementById('done');
+    doneList = doneList.querySelectorAll('input[type=text]');
+    const itemList = [];
+    inWorkList.forEach(item => {
+        itemList.push({isChecked : true, subtask : item.value});
+    });
+    doneList.forEach(item => {
+        itemList.push({isChecked : false, subtask : item.value});
+    });
+    const data = {noteTitle : title, subtasks : itemList};
+    console.log(data);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const notePage = document.getElementById('notePage');
     if (notePage) {
@@ -77,12 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 moveSubtask(event.target.closest('li'));
             } else if (event.target.dataset.name === 'markedSubtask') {
                 showHideDoneList(event.target.parentElement);
-            } else if (event.target.dataset.name === 'del') {
-                console.log('hello')
-
+            } else if (event.target.dataset.name === 'save') {
+                getData();
             }
         });
     }
 });
 
-$( document ).ready($(".dropdown-trigger").dropdown());
+$(document).ready($(".dropdown-trigger").dropdown());
+
+$(document).ready(function(){$('.sidenav').sidenav();});

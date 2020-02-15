@@ -19,7 +19,6 @@ function NotesPage(props) {
                 <Note />
                 <Note />
                 <AddTaskBtn/>
-                {/*<NoteModal />*/}
             </div>
         </MainLayout>
     );

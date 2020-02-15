@@ -7,7 +7,6 @@ function Title(props) {
                 <input id="title" type="text" name='title' defaultValue='Note Title'/>
                 <NoteImage src='img/batman-png-batman-png-png-image-700.png'/>
             </div>
-
             );
 }
 
