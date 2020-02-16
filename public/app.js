@@ -72,6 +72,16 @@ const getData = () => {
         itemList.push({isChecked : false, subtask : item.value});
     });
     const data = {noteTitle : title, subtasks : itemList};
+    fetch('/notePage', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({data})
+    })
+        .then(res => res.json())
+        .then(({note}) => {
+            console.log(note)
+        })
+        .catch(e => console.log(e));
     console.log(data);
 };
 

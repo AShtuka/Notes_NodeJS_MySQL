@@ -1,6 +1,7 @@
 const express = require('express');
 const expressReactView = require('express-react-views');
 const path = require('path');
+const sequelize = require('./utils/database');
 
 
 const homePageRoutes = require('./routes/homePage');
@@ -14,6 +15,7 @@ app.set('view engine', 'jsx');
 app.engine('jsx', expressReactView.createEngine());
 
 app.use(express.static(path.join(__dirname,'public')));
+app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/', homePageRoutes);
@@ -24,6 +26,7 @@ const PORT = process.env.PORT || 3000;
 
 async function start() {
     try {
+        await sequelize.sync();
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`)
         });
@@ -33,6 +36,8 @@ async function start() {
 }
 
 start();
+
+// {force: true}
 
 
 
