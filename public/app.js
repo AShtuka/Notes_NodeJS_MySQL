@@ -58,7 +58,7 @@ const deleteSubtask = subtask => {
     subtask.remove();
 };
 
-const getData = () => {
+const getData = (isUpdate, id) => {
     const title = document.getElementById('title').value;
     let inWorkList = document.getElementById('inWork');
     inWorkList = inWorkList.querySelectorAll('input[type=text]');
@@ -66,19 +66,25 @@ const getData = () => {
     doneList = doneList.querySelectorAll('input[type=text]');
     const itemList = [];
     inWorkList.forEach(item => {
-        itemList.push({isChecked : false, subtask : item.value});
+        itemList.push({isChecked : false, subtask : item.value, id: item.dataset.id});
     });
     doneList.forEach(item => {
-        itemList.push({isChecked : true, subtask : item.value});
+        itemList.push({isChecked : true, subtask : item.value, id: item.dataset.id});
     });
-    const data = {noteTitle : title, subtasks : itemList};
-    fetch('/notePage', {
-        method: 'post',
+    const data = {noteId: id, noteTitle : title, subtasks : itemList};
+    let route = '/notePage';
+    let method = 'post';
+    if (isUpdate) {
+        route += '/update';
+        method = 'put';
+    }
+    fetch(route, {
+        method: method,
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({data})
     })
         .then(res => {
-            if (res.status === 201) {
+            if (res.status === 201 || res.status === 200) {
                 window.location.replace('/notesPage')
             }
         })
@@ -129,10 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (event.target.dataset.name === 'markedSubtask') {
                 showHideDoneList(event.target.parentElement);
             } else if (event.target.dataset.name === 'save') {
-                getData();
+                if (notePage.dataset.id !== '') {
+                    getData(true, notePage.dataset.id)
+                } else {
+                    getData();
+                }
             } else if (event.target.dataset.name === 'delete') {
                 deleteTask(notePage.dataset.id);
-                console.log('delete')
             }
         });
     }

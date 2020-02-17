@@ -1,7 +1,7 @@
 const React = require('react');
 
 function Subtask(props) {
-    const {subtask, isDone} = props;
+    const {subtask, isDone, id} = props;
     return (
         <li name='subtasksItem' className='flex-container'>
             <div className='small-box'>
@@ -11,7 +11,10 @@ function Subtask(props) {
                 </label>
             </div>
             <div className='big-box'>
-                <input className={isDone ? 'subtask line-through' : 'subtask'} name='subtask' type="text" defaultValue={subtask ? subtask : ''} />
+                <input className={isDone ? 'subtask line-through' : 'subtask'}
+                       name='subtask' type="text"
+                       defaultValue={subtask ? subtask : ''}
+                       data-id={id}/>
             </div>
             <div className='small-box right' data-name='del'>
                 <i className="material-icons del hidden" data-name='del'>close</i>

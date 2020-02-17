@@ -22,7 +22,7 @@ function NotePage(props) {
                         <div id='inWork'>
                             {note ? note.subtasks
                                 .filter(item => !item.isDone )
-                                .map((item, index) => <Subtask key={index} subtask={item.title}/>)
+                                .map((item, index) => <Subtask key={index} subtask={item.title} id={item.id}/>)
                                 : <Subtask />
                             }
                         </div>
@@ -30,7 +30,7 @@ function NotePage(props) {
                         <div id='done' className='hidden'>
                             {note ? note.subtasks
                                     .filter(item => item.isDone )
-                                    .map((item, index) => <Subtask key={index} subtask={item.title} isDone={true}/>)
+                                    .map((item, index) => <Subtask key={index} subtask={item.title} isDone={true} id={item.id}/>)
                                 : null
                             }
                         </div>

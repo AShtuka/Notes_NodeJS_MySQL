@@ -34,9 +34,17 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/update', async (req, res) => {
     try {
+        let note = await Note.findByPk(+req.body.data.noteId,{include: [Subtask]});
+        // note = JSON.stringify(note);
+        note.title = req.body.data.noteTitle;
+        console.log(JSON.stringify(note.subtasks) + '-------------------------------------');
+        note.subtasks = JSON.parse(req.body.data.subtasks);
 
+        await note.save({include: [Subtask]});
+        console.log(req.body.data)
+        res.status(200).send();
     } catch (e) {
         console.log(e);
         res.status(500).json({
