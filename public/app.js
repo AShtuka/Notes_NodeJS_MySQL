@@ -66,10 +66,10 @@ const getData = () => {
     doneList = doneList.querySelectorAll('input[type=text]');
     const itemList = [];
     inWorkList.forEach(item => {
-        itemList.push({isChecked : true, subtask : item.value});
+        itemList.push({isChecked : false, subtask : item.value});
     });
     doneList.forEach(item => {
-        itemList.push({isChecked : false, subtask : item.value});
+        itemList.push({isChecked : true, subtask : item.value});
     });
     const data = {noteTitle : title, subtasks : itemList};
     fetch('/notePage', {
@@ -77,12 +77,12 @@ const getData = () => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({data})
     })
-        .then(res => res.json())
-        .then(({note}) => {
-            console.log(note)
+        .then(res => {
+            if (res.status === 201) {
+                window.location.replace('/notesPage')
+            }
         })
         .catch(e => console.log(e));
-    console.log(data);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -118,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showHideDoneList(event.target.parentElement);
             } else if (event.target.dataset.name === 'save') {
                 getData();
+            } else if (event.target.dataset.name === 'delete') {
+                console.log('delete')
             }
         });
     }

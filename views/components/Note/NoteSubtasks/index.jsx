@@ -16,7 +16,7 @@ function NoteSubtask(props) {
                     return (
                         <tr key={index}>
                             <td><i className="material-icons">done</i></td>
-                            <td>{item}</td>
+                            <td>{item.title}</td>
                         </tr>
                     )
                 })

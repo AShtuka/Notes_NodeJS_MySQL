@@ -7,18 +7,33 @@ const Subtask = require('./components/NotePage/subtask');
 const ManageSubtask = require('./components/NotePage/manageSubtask');
 
 function NotePage(props) {
+    const {note} = props;
     return (
         <MainLayout {...props}>
             <Navbar />
             <div id='notePage' className='note-page-container grey-text text-lighten-5'>
                 <div className='row note-page'>
-                    <Title />
-                    <ul id='subtasksContainer' className='subtasks-container hidden col s12 m10 offset-m1 l6 xl6'>
+                    <Title title={note ? note.title : null}/>
+                    <ul id='subtasksContainer' className=
+                        {note ?
+                            'subtasks-container col s12 m10 offset-m1 l6 xl6' :
+                            'subtasks-container col s12 m10 offset-m1 l6 xl6 hidden'
+                        }>
                         <div id='inWork'>
-                            <Subtask />
+                            {note ? note.subtasks
+                                .filter(item => !item.isDone )
+                                .map((item, index) => <Subtask key={index} subtask={item.title}/>)
+                                : <Subtask />
+                            }
                         </div>
                         <ManageSubtask />
-                        <div id='done' className='hidden'></div>
+                        <div id='done' className='hidden'>
+                            {note ? note.subtasks
+                                    .filter(item => item.isDone )
+                                    .map((item, index) => <Subtask key={index} subtask={item.title} isDone={true}/>)
+                                : null
+                            }
+                        </div>
                     </ul>
                 </div>
                 <Footer />

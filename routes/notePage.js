@@ -3,8 +3,15 @@ const router = Router();
 const Note = require('../models/note');
 const Subtask = require('../models/subtask');
 
-router.get('/:id', (req, res) => {
-    res.render('notePage', {title : 'notePage', isNote: true});
+router.get('/:id', async (req, res) => {
+    try {
+        const note = await Note.findOne({
+            where: {id: +req.params.id},
+            include: [Subtask]});
+        res.render('notePage', {title : 'notePage', isNote: true, note});
+    } catch (e) {
+        console.log(e)
+    }
 });
 
 router.get('/', (req, res) => {
@@ -20,7 +27,7 @@ router.post('/', async (req, res) => {
         }, {
             include: [Subtask]
         });
-        res.status(201).json({note});
+        res.status(201).send();
     } catch (e) {
        console.log(e);
        res.status(500).json({

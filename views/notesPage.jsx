@@ -5,19 +5,12 @@ const Note = require('./components/Note/note');
 const AddTaskBtn = require('./components/addTaskBtn');
 
 function NotesPage(props) {
+    const {notes} = props;
     return (
         <MainLayout {...props}>
             <Navbar />
             <div className='row'>
-                <Note />
-                <Note />
-                <Note />
-                <Note />
-                <Note />
-                <Note />
-                <Note />
-                <Note />
-                <Note />
+                {notes.map((item, index) => <Note note={item} key={index}/>)}
                 <AddTaskBtn/>
             </div>
         </MainLayout>

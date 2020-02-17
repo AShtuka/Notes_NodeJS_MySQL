@@ -5,9 +5,11 @@ const NoteSubtasks = require('./NoteSubtasks');
 const NoteMarkedItems = require('./NoteMarkedItems');
 
 function Note(props) {
-    const subtasksList = ['Marvel', 'DC', 'StarWars'];
+    const {note} = props;
+    const subtasksList = note.subtasks.filter(item => !item.isDone);
+    const count = note.subtasks.length - subtasksList.length;
     return (
-        <a href="/notePage">
+        <a href={`/notePage/${note.id}`}>
             <div className="col s10 m6 l4 xl3 offset-s1">
                 <div className="card">
 
@@ -15,11 +17,11 @@ function Note(props) {
 
                     <div className="card-content grey-text text-lighten-5">
 
-                        <NoteTitle title='Card title'/>
+                        <NoteTitle title={note.title}/>
 
                         <NoteSubtasks subtasks={subtasksList}/>
 
-                        <NoteMarkedItems count={3}/>
+                        <NoteMarkedItems count={count}/>
 
                     </div>
 

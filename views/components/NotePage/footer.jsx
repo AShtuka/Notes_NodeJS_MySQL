@@ -24,9 +24,9 @@ function Footer(props) {
                         <span data-name='save' className='text footer'> Save</span>
                     </a>
 
-                    <a data-name='del'>
-                        <i data-name='del' className="material-icons position footer">delete_forever</i>
-                        <span data-name='del' className='text footer'> Delete</span>
+                    <a data-name='delete'>
+                        <i data-name='delete' className="material-icons position footer">delete_forever</i>
+                        <span data-name='delete' className='text footer'> Delete</span>
                     </a>
 
                     <ul id='category' className='dropdown-content grey darken-3'>

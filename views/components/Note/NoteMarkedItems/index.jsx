@@ -5,7 +5,7 @@ function NoteMarkedItems(props) {
     return (
         <p className='marked-items'>
             <i className="material-icons position">add_circle_outline</i>
-            <span className='text'>{count} marked items</span>
+            <span className='text'>{count} done subtasks</span>
         </p>
     );
 }
