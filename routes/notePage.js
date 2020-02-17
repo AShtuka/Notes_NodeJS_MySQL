@@ -5,9 +5,7 @@ const Subtask = require('../models/subtask');
 
 router.get('/:id', async (req, res) => {
     try {
-        const note = await Note.findOne({
-            where: {id: +req.params.id},
-            include: [Subtask]});
+        const note = await Note.findByPk(+req.params.id,{include: [Subtask]});
         res.render('notePage', {title : 'notePage', isNote: true, note});
     } catch (e) {
         console.log(e)
@@ -36,7 +34,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
 
     } catch (e) {
@@ -47,9 +45,11 @@ router.put('/:id', (req, res) => {
     }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id',async (req, res) => {
     try {
-
+        const note = await Note.findByPk(+req.params.id);
+        await note.destroy({include: [Subtask]});
+        res.status(204).send();
     } catch (e) {
         console.log(e);
         res.status(500).json({

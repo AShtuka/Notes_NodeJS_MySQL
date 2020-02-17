@@ -85,6 +85,18 @@ const getData = () => {
         .catch(e => console.log(e));
 };
 
+const deleteTask = id => {
+    fetch(`/notePage/${id}`, {
+        method: 'delete',
+    })
+        .then(res => {
+            if (res.status === 204) {
+                window.location.replace('/notesPage')
+            }
+        })
+        .catch(e => console.log(e));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const notePage = document.getElementById('notePage');
     if (notePage) {
@@ -119,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (event.target.dataset.name === 'save') {
                 getData();
             } else if (event.target.dataset.name === 'delete') {
+                deleteTask(notePage.dataset.id);
                 console.log('delete')
             }
         });

@@ -11,7 +11,7 @@ function NotePage(props) {
     return (
         <MainLayout {...props}>
             <Navbar />
-            <div id='notePage' className='note-page-container grey-text text-lighten-5'>
+            <div id='notePage' data-id = {note ? note.id : ''} className='note-page-container grey-text text-lighten-5'>
                 <div className='row note-page'>
                     <Title title={note ? note.title : null}/>
                     <ul id='subtasksContainer' className=
