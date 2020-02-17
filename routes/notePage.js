@@ -36,14 +36,20 @@ router.post('/', async (req, res) => {
 
 router.put('/update', async (req, res) => {
     try {
-        let note = await Note.findByPk(+req.body.data.noteId,{include: [Subtask]});
-        // note = JSON.stringify(note);
+        let note = await Note.findByPk(+req.body.data.noteId);
         note.title = req.body.data.noteTitle;
-        console.log(JSON.stringify(note.subtasks) + '-------------------------------------');
-        note.subtasks = JSON.parse(req.body.data.subtasks);
-
-        await note.save({include: [Subtask]});
-        console.log(req.body.data)
+        const updateSubtasks = req.body.data.subtasks;
+        const oldSubtasks = Subtask.findAll({where: {noteId: +req.body.data.noteId}});
+        console.log(JSON.stringify(oldSubtasks));
+        // oldSubtasks.forEach(item => {
+        //     updateSubtasks.forEach(newItem => {
+        //         if (newItem.id === item.id) {
+        //             item.title = newItem.subtask;
+        //             item.isDone = newItem.isChecked;
+        //         }
+        //     })
+        // });
+        await note.save();
         res.status(200).send();
     } catch (e) {
         console.log(e);
