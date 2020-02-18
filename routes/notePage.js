@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const subtasks = req.body.data.subtasks.map(item => ({title: item.subtask, isDone: item.isChecked}));
+        const subtasks = req.body.data.subtasks.map(item => ({title: item.title, isDone: item.isDone}));
         const note = await Note.create({
             title: req.body.data.noteTitle,
             subtasks: subtasks
@@ -36,19 +36,40 @@ router.post('/', async (req, res) => {
 
 router.put('/update', async (req, res) => {
     try {
-        let note = await Note.findByPk(+req.body.data.noteId);
+        let note = await Note.findByPk(+req.body.data.noteId, {include: [Subtask]});
         note.title = req.body.data.noteTitle;
-        const updateSubtasks = req.body.data.subtasks;
-        const oldSubtasks = Subtask.findAll({where: {noteId: +req.body.data.noteId}});
-        console.log(JSON.stringify(oldSubtasks));
-        // oldSubtasks.forEach(item => {
-        //     updateSubtasks.forEach(newItem => {
-        //         if (newItem.id === item.id) {
-        //             item.title = newItem.subtask;
-        //             item.isDone = newItem.isChecked;
-        //         }
-        //     })
-        // });
+        const forUpdate = [];
+        const forCreate = [];
+
+        req.body.data.subtasks.forEach(item => {
+            if (item.id !== '') {
+                forUpdate.push(item);
+            } else {
+                forCreate.push(item);
+            }
+        });
+
+        if (forCreate.length > 0) {
+            forCreate.forEach(item => {
+                item.noteId = +req.body.data.noteId;
+                delete item.id
+            })
+        }
+
+        if (forCreate.length > 0) {
+           await Subtask.bulkCreate(forCreate);
+        }
+
+        note.subtasks.forEach(oldItem => {
+            forUpdate.forEach(async newItem => {
+                if (+newItem.id === +oldItem.id) {
+                    oldItem.title = newItem.title;
+                    oldItem.isDone = newItem.isDone;
+                    await oldItem.save();
+                }
+            })
+        });
+
         await note.save();
         res.status(200).send();
     } catch (e) {

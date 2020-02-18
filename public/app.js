@@ -4,8 +4,10 @@ const createEmptySubtask = () => {
     const subtasksList = document.getElementsByName('subtasksItem');
     const newSubtask = subtasksList[0].cloneNode(true);
     newSubtask.querySelector('.checkbox').checked = false;
-    newSubtask.querySelector('.subtask').value = '';
-    newSubtask.querySelector('.subtask').classList.remove('line-through');
+    const inputField = newSubtask.querySelector('.subtask');
+    inputField.value = '';
+    inputField.classList.remove('line-through');
+    inputField.dataset.id = '';
     emptySubtask = newSubtask.cloneNode(true);
     document.getElementById('inWork').appendChild(newSubtask);
 };
@@ -66,10 +68,10 @@ const getData = (isUpdate, id) => {
     doneList = doneList.querySelectorAll('input[type=text]');
     const itemList = [];
     inWorkList.forEach(item => {
-        itemList.push({isChecked : false, subtask : item.value, id: item.dataset.id});
+        itemList.push({isDone : false, title : item.value, id: item.dataset.id});
     });
     doneList.forEach(item => {
-        itemList.push({isChecked : true, subtask : item.value, id: item.dataset.id});
+        itemList.push({isDone : true, title : item.value, id: item.dataset.id});
     });
     const data = {noteId: id, noteTitle : title, subtasks : itemList};
     let route = '/notePage';
