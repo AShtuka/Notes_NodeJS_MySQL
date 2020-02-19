@@ -53,19 +53,20 @@ router.put('/update', async (req, res) => {
             forCreate.forEach(item => {
                 item.noteId = +req.body.data.noteId;
                 delete item.id
-            })
-        }
-
-        if (forCreate.length > 0) {
-           await Subtask.bulkCreate(forCreate);
+            });
+            await Subtask.bulkCreate(forCreate);
         }
 
         note.subtasks.forEach(oldItem => {
-            forUpdate.forEach(async newItem => {
+            forUpdate.forEach(async (newItem, index) => {
                 if (+newItem.id === +oldItem.id) {
                     oldItem.title = newItem.title;
                     oldItem.isDone = newItem.isDone;
                     await oldItem.save();
+                    return;
+                }
+                if (index === forUpdate.length - 1) {
+                    await oldItem.destroy()
                 }
             })
         });
