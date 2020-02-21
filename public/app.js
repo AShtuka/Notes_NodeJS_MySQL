@@ -103,6 +103,21 @@ const deleteTask = id => {
             }
         })
         .catch(e => console.log(e));
+};
+
+const createCategory = id => {
+    const categoryName = document.getElementById('category_name').value;
+    fetch(`/notePage/category/${id}`, {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({categoryName})
+    })
+        .then(res => {
+            if (res.status === 201) {
+                window.location.replace('/notePage')
+            }
+        })
+        .catch(e => console.log(e));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -144,6 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else if (event.target.dataset.name === 'delete') {
                 deleteTask(notePage.dataset.id);
+            } else if (event.target.id === 'createCategory') {
+                createCategory(notePage.dataset.id);
             }
         });
     }
@@ -152,3 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 $(document).ready($(".dropdown-trigger").dropdown());
 
 $(document).ready(function(){$('.sidenav').sidenav();});
+
+$(document).ready(function(){
+    $('.modal').modal();
+});

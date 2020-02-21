@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router();
 const Note = require('../models/note');
 const Subtask = require('../models/subtask');
+const Category = require('../models/category');
 
 router.get('/:id', async (req, res) => {
     try {
@@ -32,6 +33,21 @@ router.post('/', async (req, res) => {
            massage: 'Server error'
        });
     }
+});
+
+router.post('/category/:id', async (req, res) => {
+    const noteId = req.params.id;
+    try {
+        const category = await Category.create({
+            name: req.body.categoryName,
+        });
+        const note = await Note.findByPk(+noteId);
+        note.categoryId = category.id;
+        await note.save();
+        res.status(201).send();
+    } catch (e) {
+        console.log(e);
+    };
 });
 
 router.put('/update', async (req, res) => {

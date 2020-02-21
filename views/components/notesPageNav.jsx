@@ -30,8 +30,9 @@ function NotesPageNav(props) {
                     </ul>
                 </div>
                 <ul id="categories" className="dropdown-content grey darken-3">
-                    <li><a href="#">one</a></li>
-                    <li><a href="#">two</a></li>
+                    <li><a href="#">All</a></li>
+                    <li><a href="#">General</a></li>
+                    <li className="divider" tabIndex="-1"></li>
                     <li><a href="#">three</a></li>
                 </ul>
                 <ul className="sidenav" id="navBar">
@@ -45,8 +46,9 @@ function NotesPageNav(props) {
                 </ul>
 
                 <ul id="categoriesM" className="dropdown-content grey darken-3">
-                    <li><a href="#">one</a></li>
-                    <li><a href="#">two</a></li>
+                    <li><a href="#">All</a></li>
+                    <li><a href="#">General</a></li>
+                    <li className="divider" tabIndex="-1"></li>
                     <li><a href="#">three</a></li>
                 </ul>
             </nav>

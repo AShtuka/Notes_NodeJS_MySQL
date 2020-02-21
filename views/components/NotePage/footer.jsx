@@ -2,6 +2,7 @@ const React = require('react');
 
 function Footer(props) {
     return (
+        <>
                 <div className='flex-container footer-note-page grey darken-3'>
 
                     <a className='dropdown-trigger' data-name='categories' data-target='category'>
@@ -30,12 +31,29 @@ function Footer(props) {
                     </a>
 
                     <ul id='category' className='dropdown-content grey darken-3'>
-                        <li><a href="#">one</a></li>
-                        <li><a href="#">two</a></li>
+                        <li><a href="#categoryModal" className='modal-trigger'>Create new category</a></li>
+                        <li className="divider"/>
+                        <li><a href="#">General</a></li>
                         <li><a href="#">three</a></li>
                     </ul>
 
                 </div>
+
+                <div id="categoryModal" className="modal">
+                    <form action="/notePage/category" method='POST'>
+                        <div className="modal-content">
+                            <div className="input-field">
+                                <input id="category_name" type="text" name='categoryName' className="validate" />
+                                <label htmlFor="category_name">Category Name</label>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button id='createCategory' type='button' className="modal-close waves-effect waves-green btn-flat">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+        </>
     );
 }
 
