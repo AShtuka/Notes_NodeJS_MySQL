@@ -60,7 +60,7 @@ const deleteSubtask = subtask => {
     subtask.remove();
 };
 
-const getData = (isUpdate, id) => {
+const getData = (isUpdate, id, categoryName) => {
     const title = document.getElementById('title').value;
     let inWorkList = document.getElementById('inWork');
     inWorkList = inWorkList.querySelectorAll('input[type=text]');
@@ -73,7 +73,7 @@ const getData = (isUpdate, id) => {
     doneList.forEach(item => {
         itemList.push({isDone : true, title : item.value, id: item.dataset.id});
     });
-    const data = {noteId: id, noteTitle : title, subtasks : itemList};
+    const data = {noteId: id, noteTitle : title, subtasks : itemList, categoryName};
     let route = '/notePage';
     let method = 'post';
     if (isUpdate) {
@@ -107,18 +107,37 @@ const deleteTask = id => {
 
 const createCategory = id => {
     const categoryName = document.getElementById('category_name').value;
-    fetch(`/notePage/category/${id}`, {
-        method: 'post',
+    if (id === '') {
+        getData(false,'', categoryName);
+    } else {
+        fetch(`/notePage/category/${id}`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({categoryName})
+        })
+            .then(res => {
+                if (res.status === 201) {
+                    window.location.replace(`/notePage/${id}`)
+                }
+            })
+            .catch(e => console.log(e));
+    }
+};
+
+const changeCategory = (event, id) => {
+    event.preventDefault();
+    fetch(event.target.href, {
+        method: 'put',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({categoryName})
+        body: JSON.stringify({noteId: id})
     })
         .then(res => {
-            if (res.status === 201) {
+            if (res.status === 200) {
                 window.location.replace(`/notePage/${id}`)
             }
         })
         .catch(e => console.log(e));
-}
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const notePage = document.getElementById('notePage');
@@ -159,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else if (event.target.dataset.name === 'delete') {
                 deleteTask(notePage.dataset.id);
+            } else if (event.target.dataset.name === 'categoryItem') {
+                changeCategory(event, notePage.dataset.id);
             } else if (event.target.id === 'createCategory') {
                 createCategory(notePage.dataset.id);
             }

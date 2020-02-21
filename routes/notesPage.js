@@ -6,7 +6,7 @@ const Category = require('../models/category');
 
 router.get('/', async (req, res) => {
     try {
-        const notes = await Note.findAll({include: [Subtask]});
+        const notes = await Note.findAll({include: [Subtask, Category]});
         const categories = await Category.findAll();
         res.render('notesPage', {title : 'NotesPage', isNotes: true, notes, categories});
     } catch (e) {

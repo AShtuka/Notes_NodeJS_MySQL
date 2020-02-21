@@ -34,12 +34,12 @@ function Footer(props) {
                     <ul id='category' className='dropdown-content grey darken-3'>
                         <li><a href="#categoryModal" className='modal-trigger'>Create new category</a></li>
                         <li className="divider"/>
-                        <li><a href="#" className='not-active'>General</a></li>
+                        <li><a href="#" className='not-active' data-name='categoryItem'>General</a></li>
                         <li className="divider"/>
                         <li className="divider"/>
                         {categories
                             .filter(item => item.id !== 1)
-                            .map((item, index) => <li key={index}><a href="#">{item.name}</a></li>)}
+                            .map((item, index) => <li key={index}><a href={`/notePage/category/${item.id}`} data-name='categoryItem'>{item.name}</a></li>)}
                     </ul>
 
                 </div>

@@ -13,7 +13,7 @@ function NotePage(props) {
             <Navbar />
             <div id='notePage' data-id = {note ? note.id : ''} className='note-page-container grey-text text-lighten-5'>
                 <div className='row note-page'>
-                    <Title title={note ? note.title : null}/>
+                    <Title note={note}/>
                     <ul id='subtasksContainer' className=
                         {note ?
                             'subtasks-container col s12 m10 offset-m1 l6 xl6' :

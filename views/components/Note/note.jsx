@@ -19,6 +19,8 @@ function Note(props) {
 
                         <NoteTitle title={note.title}/>
 
+                        <h6>Category: {note.category.dataValues.name}</h6>
+
                         <NoteSubtasks subtasks={subtasksList}/>
 
                         <NoteMarkedItems count={count}/>

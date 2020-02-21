@@ -6,7 +6,7 @@ const Category = require('../models/category');
 
 router.get('/:id', async (req, res) => {
     try {
-        const note = await Note.findByPk(+req.params.id,{include: [Subtask]});
+        const note = await Note.findByPk(+req.params.id,{include: [Subtask, Category]});
         const categories = await Category.findAll();
         res.render('notePage', {title : 'notePage', isNote: true, note, categories});
     } catch (e) {
@@ -28,12 +28,29 @@ router.post('/', async (req, res) => {
         }, {
             include: [Subtask]
         });
+        const category = await Category.create({name: req.body.data.categoryName});
+        note.categoryId = category.id;
+        await note.save();
         res.status(201).send();
     } catch (e) {
        console.log(e);
        res.status(500).json({
            massage: 'Server error'
        });
+    }
+});
+
+
+router.put('/category/:id', async (req, res) => {
+    const categoryId = req.params.id;
+    const noteId = req.body.noteId;
+    try {
+        const note = await Note.findByPk(+noteId);
+        note.categoryId = +categoryId;
+        await note.save();
+        res.status(200).send();
+    } catch (e) {
+        console.log(e)
     }
 });
 
@@ -46,10 +63,7 @@ router.post('/category/:id', async (req, res) => {
         const note = await Note.findByPk(+noteId);
         note.categoryId = category.id;
         await note.save();
-        // const noteForView = await Note.findByPk(+noteId);
-        // const categories = await Category.findAll();
         res.status(201).send();
-        // res.render('notePage', {title : 'notePage', isNote: true, noteForView, categories});
     } catch (e) {
         console.log(e);
     };
