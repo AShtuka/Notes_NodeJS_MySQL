@@ -1,6 +1,7 @@
 const React = require('react');
 
 function NotesPageNav(props) {
+    const {categories} = props;
     return (
         <div className='navbar-fixed'>
             <nav>
@@ -33,7 +34,9 @@ function NotesPageNav(props) {
                     <li><a href="#">All</a></li>
                     <li><a href="#">General</a></li>
                     <li className="divider" tabIndex="-1"></li>
-                    <li><a href="#">three</a></li>
+                    {categories
+                        .filter(item => item.id !== 1)
+                        .map((item, index) => <li key={index}><a href="#">{item.name}</a></li>)}
                 </ul>
                 <ul className="sidenav" id="navBar">
                     <li className='active'>

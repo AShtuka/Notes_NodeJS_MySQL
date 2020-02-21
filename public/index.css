@@ -137,6 +137,13 @@ nav .brand-logo i.material-icons {
     width: 180px !important;
 }
 
+.dropdown-content li>a.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
 @media (max-width: 992px) {
     #search {
         display: none;

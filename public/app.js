@@ -114,7 +114,7 @@ const createCategory = id => {
     })
         .then(res => {
             if (res.status === 201) {
-                window.location.replace('/notePage')
+                window.location.replace(`/notePage/${id}`)
             }
         })
         .catch(e => console.log(e));

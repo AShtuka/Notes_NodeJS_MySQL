@@ -7,7 +7,7 @@ const Subtask = require('./components/NotePage/subtask');
 const ManageSubtask = require('./components/NotePage/manageSubtask');
 
 function NotePage(props) {
-    const {note} = props;
+    const {note, categories} = props;
     return (
         <MainLayout {...props}>
             <Navbar />
@@ -36,7 +36,7 @@ function NotePage(props) {
                         </div>
                     </ul>
                 </div>
-                <Footer />
+                <Footer categories={categories} />
             </div>
         </MainLayout>
     );

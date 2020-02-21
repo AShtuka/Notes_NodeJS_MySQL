@@ -1,6 +1,7 @@
 const React = require('react');
 
 function Footer(props) {
+    const {categories} = props;
     return (
         <>
                 <div className='flex-container footer-note-page grey darken-3'>
@@ -33,8 +34,12 @@ function Footer(props) {
                     <ul id='category' className='dropdown-content grey darken-3'>
                         <li><a href="#categoryModal" className='modal-trigger'>Create new category</a></li>
                         <li className="divider"/>
-                        <li><a href="#">General</a></li>
-                        <li><a href="#">three</a></li>
+                        <li><a href="#" className='not-active'>General</a></li>
+                        <li className="divider"/>
+                        <li className="divider"/>
+                        {categories
+                            .filter(item => item.id !== 1)
+                            .map((item, index) => <li key={index}><a href="#">{item.name}</a></li>)}
                     </ul>
 
                 </div>

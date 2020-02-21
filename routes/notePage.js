@@ -7,14 +7,16 @@ const Category = require('../models/category');
 router.get('/:id', async (req, res) => {
     try {
         const note = await Note.findByPk(+req.params.id,{include: [Subtask]});
-        res.render('notePage', {title : 'notePage', isNote: true, note});
+        const categories = await Category.findAll();
+        res.render('notePage', {title : 'notePage', isNote: true, note, categories});
     } catch (e) {
         console.log(e)
     }
 });
 
-router.get('/', (req, res) => {
-    res.render('notePage', {title : 'notePage', isNote: true});
+router.get('/', async (req, res) => {
+    const categories = await Category.findAll();
+    res.render('notePage', {title : 'notePage', isNote: true, categories});
 });
 
 router.post('/', async (req, res) => {
@@ -44,7 +46,10 @@ router.post('/category/:id', async (req, res) => {
         const note = await Note.findByPk(+noteId);
         note.categoryId = category.id;
         await note.save();
+        // const noteForView = await Note.findByPk(+noteId);
+        // const categories = await Category.findAll();
         res.status(201).send();
+        // res.render('notePage', {title : 'notePage', isNote: true, noteForView, categories});
     } catch (e) {
         console.log(e);
     };
